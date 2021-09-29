@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.log_sign {
+    @apply flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700
+}
+
+.log_sign_button {
+    @apply text-blue-400 hover:text-blue-500
+}
+
+.log_sign input {
+    @apply block w-full p-3 rounded mb-4
+}
