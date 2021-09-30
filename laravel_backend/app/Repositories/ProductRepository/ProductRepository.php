@@ -21,6 +21,10 @@ class ProductRepository implements ProductInterface {
         return response()->json('Product Add Successfully');
 	}
 
+    public function getUpdate($id) {
+        return response()->json(Product::where('id', $id)->first());
+	}
+
     public function update($request, $id) {
         $producUpdatetData = $request->all();
         $producUpdatetData['image'] = $request->file('image') === null ? '---' : $request->file('image')->storeAs('image/product', Str::slug($request->get('name')) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension(), 'public');

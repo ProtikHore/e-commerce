@@ -21,6 +21,10 @@ class ProductController extends Controller
         return $this->productRepo->save($request);
     }
 
+    public function getUpdate($id){
+        return $this->productRepo->getUpdate($id);
+    }
+
     public function update(ProductRequest $request, $id){
         return $this->productRepo->update($request, $id);
     }

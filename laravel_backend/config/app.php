@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Repositories\LoginRepository\LoginRepositoryServiceProvider::class,
         App\Repositories\ProductRepository\ProductRepositoryServiceProvider::class,
+        App\Repositories\OrderRepository\OrderRepositoryServiceProvider::class,
 
     ],
 
