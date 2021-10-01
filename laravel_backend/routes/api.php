@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login', [LoginController::class, 'login']);
+Route::post('/buyer/login', [BuyerController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::prefix('product')->group(function () {
