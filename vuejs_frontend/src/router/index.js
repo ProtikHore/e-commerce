@@ -25,6 +25,7 @@ import Login from '/src/components/login/LoginComponent.vue'
 import SignUp from '/src/components/signup/SignupComponent.vue'
 import Product from '/src/components/product/ProductComponent.vue'
 import ProductAdd from '/src/components/product/ProductAddComponent.vue'
+import ProductEdit from '/src/components/product/ProductEditComponent.vue'
 
 const routes = [
     {
@@ -46,6 +47,11 @@ const routes = [
         path: '/product/add',
         name: 'product_add',
         component: ProductAdd,
+    },
+    {
+        path: '/product/edit/:id',
+        name: 'product_edit',
+        component: ProductEdit,
     },
 ]
 
