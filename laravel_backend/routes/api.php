@@ -45,6 +45,8 @@ Route::prefix('order')->group(function () {
     Route::get('/product/sort/amount/{sort_by}', [OrderController::class, 'productSort']);
     Route::get('/filer/status/{status}', [OrderController::class, 'filterStatus']);
     Route::post('/save/data', [OrderController::class, 'saveOrder']);
+
+    Route::get('/buyer/product/get/list', [ProductController::class, 'index']);
 });
 //-----------------------------------------------------------------------------
 

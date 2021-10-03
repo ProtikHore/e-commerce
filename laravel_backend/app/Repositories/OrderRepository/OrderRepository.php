@@ -2,6 +2,7 @@
 namespace App\Repositories\OrderRepository;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,7 @@ use Illuminate\Support\Str;
 class OrderRepository implements OrderInterface {
 
     public function index() {
-        return response()->json(Order::get());
+        return response()->json(Order::with('orderDetail')->get());
 	}
 
     public function approveReject($id, $approveReject) {
@@ -36,10 +37,18 @@ class OrderRepository implements OrderInterface {
 	}
 
     public function saveOrder($request) {
-        $orderData = $request->all();
         $orderData['order_number'] = rand(100000, 999999);
         $orderData['status'] = 'Pending';
-        Order::create($orderData);
+        $orderData['description'] = '---';
+        $order = Order::create($orderData);
+
+        $orderDetails['order_id'] = $order->id;
+        $orderDetails['buyer_id'] = 1;
+        $orderDetails['product_id'] = $request->get('id');
+        $orderDetails['quantity'] = 1;
+        $orderDetails['price'] = $request->get('price');
+        $orderDetails['status'] = 'Active';
+        OrderDetail::create($orderDetails);
         return response()->json('Order Placed Successfully');
 	}
 }

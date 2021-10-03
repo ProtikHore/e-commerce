@@ -11,4 +11,9 @@ class Order extends Model
 
     protected $guarded = [];
     protected $table = 'orders';
+
+    public function orderDetail()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }
