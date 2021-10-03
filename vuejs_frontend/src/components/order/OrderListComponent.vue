@@ -3,13 +3,13 @@
         <div class="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
             <div class="w-full">
                 <div class="flow-root ">
-                    <div class="float-left">
+                    <!-- <div class="float-left">
                         <router-link :to="{name: 'product_add'}"><button class="items-center justify-center h-12 px-6 w-50 bg-blue-600 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Add</button></router-link>
                     </div>
                     <div class="float-right"> 
                         <input v-model="search" type="text" id="search" name="search" placeholder="Search..." class="flex-1 py-2 border-b-2 border-gray-400 focus:border-green-400 text-gray-600 placeholder-gray-400 outline-none">
                         <button @click.prevent="searchProduct" class="py-2 px-6 bg-green-400 text-white font-bold" id="searchProductID">Search</button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="bg-white shadow-md rounded my-6">
                     <table class="min-w-max w-full table-auto">
@@ -23,6 +23,9 @@
                                 <th class="py-3 px-6 text-center">Actions</th>
                             </tr>
                         </thead>
+                        <div v-for="(orderList) in orderLists" :key="orderList.id">
+                            <h2>Order: </h2>
+                        </div>
                         <tbody v-if="orderLists.length" class="text-gray-600 text-sm font-light">
                             <tr v-for="(orderList) in orderLists" :key="orderList.id" class="border-b border-gray-200 hover:bg-gray-100">
                                 <td class="py-3 px-6 text-left">
@@ -96,38 +99,15 @@ import axios from "axios";
 export default {
     data: () => ({
         orderLists: [],
-        search: '',
     }),
     methods: {
         getOrderList() {
             axios.get('http://localhost:8000/api/order/get/list').then(response => {
                 console.log(response);
-                this.orderLists = response.data;
+                console.log(response.data[0].order_details);
+                //this.orderLists = response.data;
             });
         },
-        searchProduct() {
-            console.log('button click');
-            console.log(this.search);
-            axios.get('http://localhost:8000/api/product/search/' + this.search).then(response => {
-                console.log(response);
-                this.products = response.data;
-            });
-        },
-        deleteProduct(product) {
-            console.log(`button click delete this product: Name:  ${product.name} Price: ${product.price}`);
-            console.log(product.id);
-            if(confirm(`    Are You sure want delete this product 
-                    Name:  ${product.name}
-                    Price: ${product.price}`)){
-                console.log('yes');
-                axios.post(`http://localhost:8000/api/product/delete/data/${product.id}`).then(response => {
-                    console.log(response);
-                    this.getProductData();
-                }).catch(error => {
-                    console.log(error);
-                });
-            }
-        }
     },
 
     mounted() {

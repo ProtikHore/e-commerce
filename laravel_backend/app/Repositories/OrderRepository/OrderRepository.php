@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 class OrderRepository implements OrderInterface {
 
     public function index() {
-        return response()->json(Order::with('orderDetail')->get());
+        return response()->json(Order::with('orderDetail', 'orderDetail.product', 'buyer')->get());
 	}
 
     public function approveReject($id, $approveReject) {
@@ -38,12 +38,12 @@ class OrderRepository implements OrderInterface {
 
     public function saveOrder($request) {
         $orderData['order_number'] = rand(100000, 999999);
+        $orderData['buyer_id'] = 1;
         $orderData['status'] = 'Pending';
         $orderData['description'] = '---';
         $order = Order::create($orderData);
 
         $orderDetails['order_id'] = $order->id;
-        $orderDetails['buyer_id'] = 1;
         $orderDetails['product_id'] = $request->get('id');
         $orderDetails['quantity'] = 1;
         $orderDetails['price'] = $request->get('price');

@@ -8,6 +8,8 @@
         </div>
         <div class="px-10 mt-5">
           <button @click.prevent="allProduct" class="uppercase font-bold text-2xl text-white">Product List</button >
+          <button @click.prevent="lowToHigh('lowToHigh')" class="py-1 m-2 px-2 bg-green-400 text-white font-bold">Low To High</button>
+          <button @click.prevent="lowToHigh('highToLow')" class="py-1 px-2 bg-green-400 text-white font-bold">High to Low</button>
         </div>
         <div class="px-10 grid grid-cols-4 gap-4">
             <div v-for="(product) in products" :key="product.id" class="col-span-4 sm:col-span-4 md:col-span-2 lg:col-span-1 xl:col-span-1 flex flex-col items-center">
@@ -66,6 +68,13 @@ export default {
                 this.$router.push({ name: 'order_list' });
             }).catch(error => {
                 console.log(error);
+            });
+        },
+        lowToHigh(data) {
+            console.log(data);
+            axios.get(`http://localhost:8000/api/order/product/sort/amount/${data}`).then(response => {
+                console.log(response);
+                this.products = response.data;
             });
         },
     },
