@@ -10,7 +10,8 @@
     "axios": "^0.21.4",
     "vform": "^2.1.1",
     "vue": "^3.2.16",
-    "vue-router": "^4.0.11"
+    "vue-router": "^4.0.11",
+    "vue-toast-notification": "^2.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.2",
