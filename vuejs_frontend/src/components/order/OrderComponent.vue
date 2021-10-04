@@ -22,7 +22,8 @@
                         <div class="flex items-center justify-between">
                             <div class="text-sm text-gray-600 font-light">
                                 {{product.descriptiom}}
-                                <button @click.prevent="saveOrder(product)" class="items-center justify-center h-8 px-6 w-50 bg-blue-500 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Order</button>
+                                <button v-if="product.quantity > 0" @click.prevent="saveOrder(product)" class="items-center justify-center h-8 px-6 w-50 bg-blue-500 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Order</button>
+                                <button v-else class="cursor-not-allowed items-center justify-center h-8 px-6 w-50 bg-red-500 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Out Of Stock</button>
                             </div>
                             <div class="text-2xl text-red-600 font-bold">
                                 {{product.price}}
