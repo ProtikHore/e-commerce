@@ -39,4 +39,8 @@ class OrderController extends Controller
     public function saveOrder(Request $request){
         return $this->orderRepo->saveOrder($request);
     }
+
+    public function notification() {
+        return $this->orderRepo->notification();
+    }
 }

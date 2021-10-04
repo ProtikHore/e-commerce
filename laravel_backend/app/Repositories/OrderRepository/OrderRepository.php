@@ -5,7 +5,9 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\User;
+use App\Notifications\OrderNotification;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -50,5 +52,19 @@ class OrderRepository implements OrderInterface {
         $orderDetails['status'] = 'Active';
         OrderDetail::create($orderDetails);
         return response()->json('Order Placed Successfully');
+	}
+
+    public function notification() {
+         $user = User::first();
+        $details = [
+            'greeting' => 'Hi',
+            'body' => 'This is my first notification',
+            'thanks' => 'Thank you for using e-commerce',
+            'actionText' => 'View My Site',
+            'actionURL' => url('/'),
+            'order_id' => 102
+        ];
+        Notification::send($user, new OrderNotification($details));
+        return response()->json('done');
 	}
 }
