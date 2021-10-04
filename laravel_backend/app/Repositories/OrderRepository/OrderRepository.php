@@ -33,7 +33,7 @@ class OrderRepository implements OrderInterface {
 	}
 
     public function filterStatus($status) {
-        return response()->json(Order::where('status', $status)->get());
+        return response()->json(Order::with('orderDetail', 'orderDetail.product', 'buyer')->where('status', $status)->get());
 	}
 
     public function saveOrder($request) {
