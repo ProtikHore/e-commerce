@@ -9,5 +9,4 @@ interface OrderInterface {
     public function productSort($sortBy);
     public function filterStatus($status);
     public function saveOrder($request);
-    public function notification();
 }
