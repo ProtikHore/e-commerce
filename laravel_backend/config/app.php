@@ -177,6 +177,7 @@ return [
         App\Repositories\LoginRepository\LoginRepositoryServiceProvider::class,
         App\Repositories\ProductRepository\ProductRepositoryServiceProvider::class,
         App\Repositories\OrderRepository\OrderRepositoryServiceProvider::class,
+        App\Repositories\BuyerRepository\BuyerRepositoryServiceProvider::class,
 
     ],
 

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Buyer\LoginRequest;
 use App\Models\Buyer;
-use App\Repositories\BuyertRepository\BuyerInterface;
+use App\Repositories\BuyerRepository\BuyerInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +15,7 @@ class BuyerController extends Controller
 		$this->buyerRepo = $buyerRepo;
 	}
 
-    public function index(){
-        return $this->buyerRepo->index();
+    public function login(LoginRequest $request){
+        return $this->buyerRepo->login($request);
     }
 }
