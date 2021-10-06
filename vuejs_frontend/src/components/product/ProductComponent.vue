@@ -6,6 +6,7 @@
                     <div class="float-left">
                         <router-link :to="{name: 'product_add'}"><button class="items-center justify-center h-12 px-6 w-50 bg-blue-600 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Add</button></router-link>
                     </div>
+                    {{user}}
                     <div class="float-right"> 
                         <input v-model="search" type="text" id="search" name="search" placeholder="Search..." class="flex-1 py-2 border-b-2 border-gray-400 focus:border-green-400 text-gray-600 placeholder-gray-400 outline-none">
                         <button @click.prevent="searchProduct" class="py-2 px-6 bg-green-400 text-white font-bold" id="searchProductID">Search</button>
@@ -94,6 +95,15 @@
 <script>
 import axios from 'axios'
 export default {
+    computed: {
+        welcome() {
+            return this.$store.getters.getWelcome;
+        },
+        user() {
+            return this.$store.getters.getUser;
+        }
+    },
+
     data: () => ({
         products: [],
         search: '',
@@ -101,8 +111,19 @@ export default {
 
     methods: {
         getProductData() {
-            axios.get('http://localhost:8000/api/product/get/list').then(response => {
+            //axios.defaults.headers.common['Authorization'] = `Bearer MFPUP2KACIGQOVWpMk2A19p0MxlKRzwlK0N9RKXi}`;
+            axios.get('http://localhost:8000/api/product/get/list', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer MFPUP2KACIGQOVWpMk2A19p0MxlKRzwlK0N9RKXi`
+            }
+            }).then(response => {
                 console.log(response);
+                this.$toast.success('Order placed.', {
+                    // override the global option
+                    position: 'bottom-right'
+                })
                 this.products = response.data;
             });
         },

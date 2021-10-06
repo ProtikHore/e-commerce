@@ -34,12 +34,15 @@ export default {
             console.log('click');
             this.loginForm.post('http://localhost:8000/api/login').then(response => {
                 console.log(response);
+                this.getUserData();
                 this.$router.push({ name: 'product' });
             });
         },
         getUserData() {
             axios.get('http://localhost:8000/api/product/get/list').then(response => {
                 console.log(response);
+                let user = response.data;
+                this.$store.commit('SET_USER', user);
             });
         }
     },
