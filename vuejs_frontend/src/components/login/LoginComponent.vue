@@ -21,6 +21,7 @@
 <script>
 import Form from 'vform'
 import axios from 'axios'
+import {API_BASE_URL} from '../../config';
 export default {
     data: () => ({
         loginForm: new Form({
@@ -32,17 +33,24 @@ export default {
     methods: {
         login() {
             console.log('click');
-            this.loginForm.post('http://localhost:8000/api/login').then(response => {
-                console.log(response);
+            this.loginForm.post(`${API_BASE_URL}/login`).then(response => {
+                console.log(JSON.stringify(response.data));
+                this.$toast.success('Login Successfull', {
+                    position: 'bottom-right'
+                });
+                this.$store.commit('SET_TOKEN', response.data);
+                localStorage.setItem('token', response.data);
                 this.getUserData();
                 this.$router.push({ name: 'product' });
             });
         },
         getUserData() {
-            axios.get('http://localhost:8000/api/product/get/list').then(response => {
+            axios.get(`${API_BASE_URL}/product/get/list`).then(response => {
                 console.log(response);
                 let user = response.data;
                 this.$store.commit('SET_USER', user);
+                this.$store.commit('SET_AUTHENTICATED', true);
+                localStorage.setItem('authenticated', true);
             });
         }
     },

@@ -14,12 +14,24 @@ import './index.css';
 import router from "./router";
 import store from "./store/index.js";
 import VueToast from 'vue-toast-notification';
-// Import one of the available themes
 //import 'vue-toast-notification/dist/theme-default.css';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-const app = createApp(App);
-app.use(router);
-app.use(store);
-app.use(VueToast);
-app.mount("#app");
+
+let authenticated = localStorage.getItem("authenticated");
+
+if(authenticated){
+    store.dispatch('authenticatedUser').then(() => {
+        const app = createApp(App);
+        app.use(router);
+        app.use(store);
+        app.use(VueToast);
+        app.mount("#app");
+    });
+}else {
+    const app = createApp(App);
+    app.use(router);
+    app.use(store);
+    app.use(VueToast);
+    app.mount("#app");
+}

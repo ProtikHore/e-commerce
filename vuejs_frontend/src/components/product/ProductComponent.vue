@@ -94,6 +94,7 @@
 
 <script>
 import axios from 'axios'
+import {API_BASE_URL} from '../../config';
 export default {
     computed: {
         welcome() {
@@ -112,25 +113,21 @@ export default {
     methods: {
         getProductData() {
             //axios.defaults.headers.common['Authorization'] = `Bearer MFPUP2KACIGQOVWpMk2A19p0MxlKRzwlK0N9RKXi}`;
-            axios.get('http://localhost:8000/api/product/get/list', {
+            axios.get(`${API_BASE_URL}/product/get/list`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization': `Bearer MFPUP2KACIGQOVWpMk2A19p0MxlKRzwlK0N9RKXi`
+                'Authorization': `Bearer ${token}`
             }
             }).then(response => {
                 console.log(response);
-                this.$toast.success('Order placed.', {
-                    // override the global option
-                    position: 'bottom-right'
-                })
                 this.products = response.data;
             });
         },
         searchProduct() {
             console.log('button click');
             console.log(this.search);
-            axios.get('http://localhost:8000/api/product/search/' + this.search).then(response => {
+            axios.get(`${API_BASE_URL}/product/search/${this.search}`).then(response => {
                 console.log(response);
                 this.products = response.data;
             });
@@ -142,8 +139,11 @@ export default {
                     Name:  ${product.name}
                     Price: ${product.price}`)){
                 console.log('yes');
-                axios.post(`http://localhost:8000/api/product/delete/data/${product.id}`).then(response => {
+                axios.post(`${API_BASE_URL}/product/delete/data/${product.id}`).then(response => {
                     console.log(response);
+                    this.$toast.success('Delete Successfull', {
+                    position: 'bottom-right'
+                });
                     this.getProductData();
                 }).catch(error => {
                     console.log(error);
@@ -153,6 +153,7 @@ export default {
     },
 
     mounted() {
+        console.log(JSON.parse(localStorage.getItem('token')));
         this.getProductData();
         console.log('product');
     }
