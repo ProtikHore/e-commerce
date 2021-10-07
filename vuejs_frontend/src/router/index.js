@@ -1,28 +1,11 @@
-// import Vue from 'vue';
-// import VueRouter from "vue-router";
-
-// import Login from '../components/login/LoginComponent.vue';
-
-
-// Vue.use(VueRouter);
-
-// const routes = new VueRouter({
-//     mode: 'history',
-//     routes: [
-//         {
-//             path: '/',
-//             name: 'login',
-//             component: Login,
-//         },
-//     ]
-// });
-
-// export default routes;
-
-
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '/src/components/login/LoginComponent.vue'
-import SignUp from '/src/components/signup/SignupComponent.vue'
+import LandingPage from '/src/components/landing_page/LandingPageComponent.vue'
+import AdminLogin from '/src/components/login/AdminLoginComponent.vue'
+import AdminDashboard from '/src/components/admin/AdminDashboardComponent.vue'
+
+
+import BuyerLogin from '/src/components/login/BuyerLoginComponent.vue'
+import BuyerSignUp from '/src/components/signup/BuyerSignupComponent.vue'
 import Product from '/src/components/product/ProductComponent.vue'
 import ProductAdd from '/src/components/product/ProductAddComponent.vue'
 import ProductEdit from '/src/components/product/ProductEditComponent.vue'
@@ -32,13 +15,28 @@ import OrderList from '/src/components/order/OrderListComponent.vue'
 const routes = [
     {
         path: '/',
-        name: 'login',
-        component: Login,
+        name: 'landing_page',
+        component: LandingPage,
     },
     {
-        path: '/signup',
-        name: 'signup',
-        component: SignUp,
+        path: '/admin/login',
+        name: 'admin_login',
+        component: AdminLogin,
+    },
+    {
+        path: '/admin/dashboard',
+        name: 'admin_dashboard',
+        component: AdminDashboard,
+    },
+    {
+        path: '/buyer/login',
+        name: 'buyer_login',
+        component: BuyerLogin,
+    },
+    {
+        path: '/buyer/signup',
+        name: 'buyer_signup',
+        component: BuyerSignUp,
     },
     {
         path: '/product',

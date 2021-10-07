@@ -23,7 +23,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
  
 <template>
-    <div class="p-4">
+    <div>
         <router-view />
     </div>
 </template>

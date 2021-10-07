@@ -13,7 +13,8 @@ class LoginRepository implements LoginInterface {
         if (!Hash::check($request->get('password'), $user->password)) {
             return response()->json(['error' => 'Unauthorized Access!'], 401);
         } else {
-            return $user->createToken('access_token')->plainTextToken;
+            // return $user->createToken('access_token')->plainTextToken;
+            return response()->json(['user' => $user, 'token' => $user->createToken('access_token')->plainTextToken]);
         }
 	}
 }

@@ -1,5 +1,6 @@
 <template>
     <div class="log_sign">
+        <h2 class="text-blue-400 items-center text-3xl">Admin Login</h2>
         <form @submit.prevent="login" class="flex flex-col bg-white rounded shadow-lg p-12 mt-12" action="">
             <label class="font-semibold text-xs" for="usernameField">Username or Email</label>
             <input v-model="loginForm.email" class="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2" type="text" :class="{ 'text-sm sm:text-base relative w-full border rounded placeholder-gray-400 focus:border-indigo-400 focus:outline-none py-2 pr-2 pl-12 border-red-500': loginForm.errors.has('email') }">
@@ -10,10 +11,6 @@
             <div class="text-red-500" v-if="loginForm.errors.has('password')" v-html="loginForm.errors.get('password')"/>
 
             <button class="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700">Login</button>
-            <div class="flex mt-6 justify-center text-xs">
-                <span class="mx-2 text-gray-300">/</span>
-                <router-link :to="{name: 'signup'}" class="log_sign_button">Sign Up</router-link>
-            </div>
         </form>
     </div>
 </template>
@@ -34,25 +31,21 @@ export default {
         login() {
             console.log('click');
             this.loginForm.post(`${API_BASE_URL}/login`).then(response => {
-                console.log(JSON.stringify(response.data));
+                console.log(response.data);
                 this.$toast.success('Login Successfull', {
                     position: 'bottom-right'
                 });
-                this.$store.commit('SET_TOKEN', response.data);
-                localStorage.setItem('token', response.data);
-                this.getUserData();
-                this.$router.push({ name: 'product' });
-            });
-        },
-        getUserData() {
-            axios.get(`${API_BASE_URL}/product/get/list`).then(response => {
-                console.log(response);
-                let user = response.data;
+                let token = response.data.token.split('|');
+                console.log(token);
+                this.$store.commit('SET_TOKEN', token[1]);
+                localStorage.setItem('token', token[1]);
+                let user = response.data.user;
                 this.$store.commit('SET_USER', user);
                 this.$store.commit('SET_AUTHENTICATED', true);
                 localStorage.setItem('authenticated', true);
+                this.$router.push({ name: 'product' });
             });
-        }
+        },
     },
 
     mounted() {

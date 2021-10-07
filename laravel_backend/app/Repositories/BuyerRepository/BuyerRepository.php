@@ -13,7 +13,8 @@ class BuyerRepository implements BuyerInterface {
         if (!Hash::check($request->get('password'), $buyer->password)) {
             return response()->json(['error' => 'Unauthorized Access!'], 401);
         } else {
-            return $buyer->createToken('buyer_access_token')->plainTextToken;
+            // return $buyer->createToken('buyer_access_token')->plainTextToken;
+            return response()->json(['user' => $buyer, 'token' => $buyer->createToken('buyer_access_token')->plainTextToken]);
         }
 	}
 }

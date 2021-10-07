@@ -117,7 +117,7 @@ export default {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
             }).then(response => {
                 console.log(response);
@@ -153,7 +153,7 @@ export default {
     },
 
     mounted() {
-        console.log(JSON.parse(localStorage.getItem('token')));
+        console.log(localStorage.getItem('token'));
         this.getProductData();
         console.log('product');
     }

@@ -17,21 +17,25 @@ import VueToast from 'vue-toast-notification';
 //import 'vue-toast-notification/dist/theme-default.css';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-
-let authenticated = localStorage.getItem("authenticated");
-
-if(authenticated){
-    store.dispatch('authenticatedUser').then(() => {
-        const app = createApp(App);
-        app.use(router);
-        app.use(store);
-        app.use(VueToast);
-        app.mount("#app");
-    });
-}else {
-    const app = createApp(App);
+const app = createApp(App);
     app.use(router);
     app.use(store);
     app.use(VueToast);
     app.mount("#app");
-}
+
+// let authenticated = localStorage.getItem("authenticated");
+// if(authenticated){
+//     store.dispatch('authenticatedUser').then(() => {
+//         const app = createApp(App);
+//         app.use(router);
+//         app.use(store);
+//         app.use(VueToast);
+//         app.mount("#app");
+//     });
+// }else {
+//     const app = createApp(App);
+//     app.use(router);
+//     app.use(store);
+//     app.use(VueToast);
+//     app.mount("#app");
+// }

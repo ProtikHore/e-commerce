@@ -25,17 +25,17 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/buyer/login', [BuyerController::class, 'login']);
 
 Route::group(['middleware' => ['auth:users']], function(){
-
+    Route::prefix('product')->group(function () {
+        Route::get('/get/list', [ProductController::class, 'index']);
+        Route::post('/save/data', [ProductController::class, 'save']);
+        Route::get('/get/update/data/{id}', [ProductController::class, 'getUpdate']);
+        Route::post('/update/data/{id}', [ProductController::class, 'update']);
+        Route::post('/delete/data/{id}', [ProductController::class, 'delete']);
+        Route::get('/search/{name}', [ProductController::class, 'search']);
+    });
 });
 
-Route::prefix('product')->group(function () {
-    Route::get('/get/list', [ProductController::class, 'index']);
-    Route::post('/save/data', [ProductController::class, 'save']);
-    Route::get('/get/update/data/{id}', [ProductController::class, 'getUpdate']);
-    Route::post('/update/data/{id}', [ProductController::class, 'update']);
-    Route::post('/delete/data/{id}', [ProductController::class, 'delete']);
-    Route::get('/search/{name}', [ProductController::class, 'search']);
-});
+
 
 //-------------------------------------------
 
