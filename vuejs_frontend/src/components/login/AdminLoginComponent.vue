@@ -43,7 +43,7 @@ export default {
                 this.$store.commit('SET_USER', user);
                 this.$store.commit('SET_AUTHENTICATED', true);
                 localStorage.setItem('authenticated', true);
-                this.$router.push({ name: 'product' });
+                this.$router.push({ name: 'admin_dashboard' });
             });
         },
     },

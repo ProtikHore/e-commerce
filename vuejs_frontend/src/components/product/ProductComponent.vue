@@ -1,6 +1,9 @@
 <template>
     <div class="overflow-x-auto">
         <div class="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
+            <div class="">
+                <AdminDashboard />
+            </div>
             <div class="w-full">
                 <div class="flow-root ">
                     <div class="float-left">
@@ -95,7 +98,12 @@
 <script>
 import axios from 'axios'
 import {API_BASE_URL} from '../../config';
+import AdminDashboard from '../../components/admin/AdminDashboardComponent.vue'
 export default {
+    components: {
+        AdminDashboard, 
+    },
+
     computed: {
         welcome() {
             return this.$store.getters.getWelcome;
