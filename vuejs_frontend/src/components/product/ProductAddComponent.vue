@@ -38,7 +38,7 @@
     <div class="overflow-x-auto">
         <div class="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
             <div class="">
-                <AdminDashboard />
+                <AdminLayout />
             </div>
             <div class="w-full">
                 <div class="bg-white shadow-md rounded my-6">
@@ -81,10 +81,10 @@
 import Form from 'vform'
 import axios from 'axios'
 import {API_BASE_URL} from '../../config';
-import AdminDashboard from '../../components/admin/AdminDashboardComponent.vue'
+import AdminLayout from '../../components/admin/AdminLayoutComponent.vue'
 export default {
     components: {
-        AdminDashboard, 
+        AdminLayout, 
     },
     
     data: () => ({

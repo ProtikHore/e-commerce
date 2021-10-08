@@ -2,7 +2,7 @@
     <div class="overflow-x-auto">
         <div class="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
             <div class="">
-                <AdminDashboard />
+                <AdminLayout />
             </div>
             <div class="w-full">
                 <div class="flow-root ">
@@ -98,10 +98,10 @@
 <script>
 import axios from 'axios'
 import {API_BASE_URL} from '../../config';
-import AdminDashboard from '../../components/admin/AdminDashboardComponent.vue'
+import AdminLayout from '../../components/admin/AdminLayoutComponent.vue'
 export default {
     components: {
-        AdminDashboard, 
+        AdminLayout, 
     },
 
     computed: {
@@ -150,8 +150,8 @@ export default {
                 axios.post(`${API_BASE_URL}/product/delete/data/${product.id}`).then(response => {
                     console.log(response);
                     this.$toast.success('Delete Successfull', {
-                    position: 'bottom-right'
-                });
+                        position: 'bottom-right'
+                    });
                     this.getProductData();
                 }).catch(error => {
                     console.log(error);

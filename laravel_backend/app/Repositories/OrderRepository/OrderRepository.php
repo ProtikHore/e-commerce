@@ -22,7 +22,7 @@ class OrderRepository implements OrderInterface {
 	}
 
     public function searchOrderNumber($orderNumber) {
-        return response()->json(Order::where('order_number', $orderNumber)->get());
+        return response()->json(Order::with('orderDetail', 'orderDetail.product', 'buyer')->where('order_number', $orderNumber)->get());
 	}
 
     public function updateStatus($id, $status) {

@@ -1,14 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from '/src/components/landing_page/LandingPageComponent.vue'
+//admin
 import AdminLogin from '/src/components/login/AdminLoginComponent.vue'
+import AdminLayout from '/src/components/admin/AdminLayoutComponent.vue'
 import AdminDashboard from '/src/components/admin/AdminDashboardComponent.vue'
-
-
-import BuyerLogin from '/src/components/login/BuyerLoginComponent.vue'
-import BuyerSignUp from '/src/components/signup/BuyerSignupComponent.vue'
 import Product from '/src/components/product/ProductComponent.vue'
 import ProductAdd from '/src/components/product/ProductAddComponent.vue'
 import ProductEdit from '/src/components/product/ProductEditComponent.vue'
+import AdminOrderList from '/src/components/admin/AdminOrderListComponent.vue'
+
+
+//buyer
+import BuyerLogin from '/src/components/login/BuyerLoginComponent.vue'
+import BuyerSignUp from '/src/components/signup/BuyerSignupComponent.vue'
 import Order from '/src/components/order/OrderComponent.vue'
 import OrderList from '/src/components/order/OrderListComponent.vue'
 
@@ -29,14 +33,9 @@ const routes = [
         component: AdminDashboard,
     },
     {
-        path: '/buyer/login',
-        name: 'buyer_login',
-        component: BuyerLogin,
-    },
-    {
-        path: '/buyer/signup',
-        name: 'buyer_signup',
-        component: BuyerSignUp,
+        path: '/admin/layout',
+        name: 'admin_layout',
+        component: AdminLayout,
     },
     {
         path: '/product',
@@ -52,6 +51,21 @@ const routes = [
         path: '/product/edit/:id',
         name: 'product_edit',
         component: ProductEdit,
+    },
+    {
+        path: '/admin/order/list',
+        name: 'admin_order_list',
+        component: AdminOrderList,
+    },
+    {
+        path: '/buyer/login',
+        name: 'buyer_login',
+        component: BuyerLogin,
+    },
+    {
+        path: '/buyer/signup',
+        name: 'buyer_signup',
+        component: BuyerSignUp,
     },
     {
         path: '/order',
