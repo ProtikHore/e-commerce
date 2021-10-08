@@ -26,6 +26,11 @@ class OrderRepository implements OrderInterface {
 	}
 
     public function updateStatus($id, $status) {
+        if($status === 'Delivered') {
+            $quantity = OrderDetail::where('order_id', $id)->first();
+            $currentQuantity = Product::where('id', $quantity->product_id)->first();
+            Product::where('id', $quantity->product_id)->update(['quantity' => $currentQuantity->quantity - $quantity->quantity]);
+        }
         return response()->json(Order::where('id', $id)->update(['status' => $status]));
 	}
 
