@@ -1,6 +1,9 @@
 <template>
     <div class="overflow-x-auto">
         <div class="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
+            <div class="">
+                <BuyerLayout />
+            </div>
             <div class="w-full">
                 <div class="flow-root ">
                     <div class="relative inline-flex">
@@ -96,13 +99,24 @@
 
 <script>
 import axios from "axios";
+import BuyerLayout from '../../components/buyer/BuyerLayoutComponent.vue'
 export default {
+    components: {
+        BuyerLayout, 
+    },
+
     data: () => ({
         orderLists: [],
     }),
     methods: {
         getOrderList() {
-            axios.get('http://localhost:8000/api/order/get/list').then(response => {
+            axios.get('http://localhost:8000/api/order/buyer/get/list', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('buyer_token')}`
+            }
+            }).then(response => {
                 console.log(response);
                 console.log(response.data[0].buyer.name);
                 console.log(response.data[0].order_detail[0].product.price);
@@ -111,7 +125,13 @@ export default {
         },
         changeStatus(event) {
             console.log(event.target.value);
-            axios.get(`http://localhost:8000/api/order/filer/status/${event.target.value}`).then(response => {
+            axios.get(`http://localhost:8000/api/order/filer/status/${event.target.value}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('buyer_token')}`
+            }
+            }).then(response => {
                 console.log(response);
                 this.orderLists = response.data;
             });

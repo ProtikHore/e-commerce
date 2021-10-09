@@ -1,5 +1,8 @@
 <template>
     <div class="h-screen w-full flex bg-gray-800">
+        <div class="">
+            <BuyerLayout />
+        </div>
       <!-- main -->
       <main class="w-full overflow-y-auto">
         <div class="float-right"> 
@@ -39,7 +42,12 @@
 
 <script>
 import axios from 'axios'
+import BuyerLayout from '../../components/buyer/BuyerLayoutComponent.vue'
 export default {
+    components: {
+        BuyerLayout, 
+    },
+
     data: () => ({
         products: [],
         search: '',
@@ -47,7 +55,13 @@ export default {
 
     methods: {
         getProductData() {
-            axios.get('http://localhost:8000/api/order/buyer/product/get/list').then(response => {
+            axios.get('http://localhost:8000/api/order/buyer/product/get/list', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('buyer_token')}`
+            }
+            }).then(response => {
                 console.log(response);
                 this.products = response.data;
             });
@@ -55,7 +69,13 @@ export default {
         searchProduct() {
             console.log('button click');
             console.log(this.search);
-            axios.get('http://localhost:8000/api/product/search/' + this.search).then(response => {
+            axios.get('http://localhost:8000/api/product/search/' + this.search, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('buyer_token')}`
+            }
+            }).then(response => {
                 console.log(response);
                 this.products = response.data;
             });
@@ -64,7 +84,13 @@ export default {
             this.getProductData();
         },
         saveOrder(product) {
-            axios.post('http://localhost:8000/api/order/save/data', product).then(response => {
+            axios.post('http://localhost:8000/api/order/save/data', product, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('buyer_token')}`
+            }
+            }).then(response => {
                 console.log(response);
                 this.$router.push({ name: 'order_list' });
             }).catch(error => {
@@ -73,7 +99,13 @@ export default {
         },
         lowToHigh(data) {
             console.log(data);
-            axios.get(`http://localhost:8000/api/order/product/sort/amount/${data}`).then(response => {
+            axios.get(`http://localhost:8000/api/order/product/sort/amount/${data}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('buyer_token')}`
+            }
+            }).then(response => {
                 console.log(response);
                 this.products = response.data;
             });
@@ -81,6 +113,7 @@ export default {
     },
 
     mounted() {
+        console.log(localStorage.getItem('buyer_token'));
         this.getProductData();
         console.log('product');
     }

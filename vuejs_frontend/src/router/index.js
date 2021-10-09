@@ -11,6 +11,8 @@ import AdminOrderList from '/src/components/admin/AdminOrderListComponent.vue'
 
 
 //buyer
+import BuyerDashboard from '/src/components/buyer/BuyerDashboardComponent.vue'
+import BuyerLayout from '/src/components/buyer/BuyerLayoutComponent.vue'
 import BuyerLogin from '/src/components/login/BuyerLoginComponent.vue'
 import BuyerSignUp from '/src/components/signup/BuyerSignupComponent.vue'
 import Order from '/src/components/order/OrderComponent.vue'
@@ -66,6 +68,16 @@ const routes = [
         path: '/buyer/signup',
         name: 'buyer_signup',
         component: BuyerSignUp,
+    },
+    {
+        path: '/buyer/dashboard',
+        name: 'buyer_dashboard',
+        component: BuyerDashboard,
+    },
+    {
+        path: '/buyer/layout',
+        name: 'buyer_layout',
+        component: BuyerLayout,
     },
     {
         path: '/order',

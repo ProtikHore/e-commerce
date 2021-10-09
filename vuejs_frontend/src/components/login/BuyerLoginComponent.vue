@@ -34,7 +34,7 @@ export default {
     methods: {
         login() {
             console.log('click');
-            this.loginForm.post(`${API_BASE_URL}/login`).then(response => {
+            this.loginForm.post(`${API_BASE_URL}/buyer/login`).then(response => {
                 console.log(response.data);
                 this.$toast.success('Login Successfull', {
                     position: 'bottom-right'
@@ -47,7 +47,7 @@ export default {
                 this.$store.commit('SET_BUYER', user);
                 this.$store.commit('SET_BUYER_AUTHENTICATED', true);
                 localStorage.setItem('buyer_authenticated', true);
-                this.$router.push({ name: 'product' });
+                this.$router.push({ name: 'order' });
             });
         },
     },

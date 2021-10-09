@@ -17,4 +17,10 @@ class BuyerRepository implements BuyerInterface {
             return response()->json(['user' => $buyer, 'token' => $buyer->createToken('buyer_access_token')->plainTextToken]);
         }
 	}
+
+    public function logout($request) {
+        return response()->json('logourasas');
+        $data = $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Successfully logged out', 'data' => $data]);
+	}
 }

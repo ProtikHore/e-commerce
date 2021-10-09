@@ -18,4 +18,8 @@ class BuyerController extends Controller
     public function login(LoginRequest $request){
         return $this->buyerRepo->login($request);
     }
+
+    public function logout(Request $request) {
+        return $this->buyerRepo->logout($request);
+    }
 }

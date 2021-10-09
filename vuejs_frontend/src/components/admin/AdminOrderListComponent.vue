@@ -123,7 +123,13 @@ export default {
     }),
     methods: {
         getOrderList() {
-            axios.get('http://localhost:8000/api/order/get/list').then(response => {
+            axios.get('http://localhost:8000/api/product/get/list', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+            }).then(response => {
                 console.log(response);
                 console.log(response.data[0].buyer.name);
                 console.log(response.data[0].order_detail[0].product.price);

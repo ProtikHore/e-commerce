@@ -121,7 +121,7 @@ export default {
     methods: {
         getProductData() {
             //axios.defaults.headers.common['Authorization'] = `Bearer MFPUP2KACIGQOVWpMk2A19p0MxlKRzwlK0N9RKXi}`;
-            axios.get(`${API_BASE_URL}/product/get/list`, {
+            axios.get(`${API_BASE_URL}/product/admin/product/get/list`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -135,7 +135,13 @@ export default {
         searchProduct() {
             console.log('button click');
             console.log(this.search);
-            axios.get(`${API_BASE_URL}/product/search/${this.search}`).then(response => {
+            axios.get(`${API_BASE_URL}/product/search/${this.search}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+            }).then(response => {
                 console.log(response);
                 this.products = response.data;
             });
@@ -147,7 +153,13 @@ export default {
                     Name:  ${product.name}
                     Price: ${product.price}`)){
                 console.log('yes');
-                axios.post(`${API_BASE_URL}/product/delete/data/${product.id}`).then(response => {
+                axios.post(`${API_BASE_URL}/product/delete/data/${product.id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+                }).then(response => {
                     console.log(response);
                     this.$toast.success('Delete Successfull', {
                         position: 'bottom-right'
