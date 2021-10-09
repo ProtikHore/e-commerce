@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Buyer\LoginRequest;
+use App\Http\Requests\Buyer\SignupRequest;
 use App\Models\Buyer;
 use App\Repositories\BuyerRepository\BuyerInterface;
 use Illuminate\Http\Request;
@@ -21,5 +22,9 @@ class BuyerController extends Controller
 
     public function logout(Request $request) {
         return $this->buyerRepo->logout($request);
+    }
+
+    public function signup(SignupRequest $request) {
+        return $this->buyerRepo->signup($request);
     }
 }

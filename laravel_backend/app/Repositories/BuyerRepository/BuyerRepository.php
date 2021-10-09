@@ -23,4 +23,12 @@ class BuyerRepository implements BuyerInterface {
         $data = $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Successfully logged out', 'data' => $data]);
 	}
+
+    public function signup($request) {
+        $data['name'] = $request->get('name');
+        $data['email'] = $request->get('email');
+        $data['password'] = Hash::Make($request->get('password'));
+        Buyer::create($data);
+        return response()->json($data);
+	}
 }

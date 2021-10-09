@@ -11,4 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Buyer extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $guarded = [];
+    protected $table = 'buyers';
 }

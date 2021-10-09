@@ -27,15 +27,6 @@
                     <textarea v-model="productUpdateForm.description" name="description" id="description" cols="5" rows="3" class="flex-1 py-2 border-b-2 border-gray-400 focus:border-green-400 text-gray-600 placeholder-gray-400 outline-none"></textarea>
                     <div class="text-red-500" v-if="productUpdateForm.errors.has('description')" v-html="productUpdateForm.errors.get('description')"/>
                 </div>
-                <!-- <div class="flex items-center mb-5">
-                    <label for="number" class="inline-block w-20 mr-6 text-right font-bold text-gray-600">Select</label>
-                    <select class="flex-1 py-2 border-b-2 border-gray-400 focus:border-green-400 text-gray-600 placeholder-gray-400 outline-none">
-                        <option>Surabaya</option>
-                        <option>Jakarta</option>
-                        <option>bandung</option>
-                        <option>Tangerang</option>
-                    </select>
-                </div> -->
                 <div class="text-right">
                     <button class="py-3 px-8 bg-green-400 text-white font-bold">Update</button> 
                 </div>

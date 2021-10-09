@@ -34,7 +34,6 @@
                                         <div class="mr-2">
                                             <img class="w-20 h-20 rounded-full" :src="'http://localhost:8000/' + 'storage/' + product.image"/>
                                         </div>
-                                        <!-- <span>{{product.image}}</span> -->
                                     </div>
                                 </td>
                                 <td class="py-3 px-6 text-left whitespace-nowrap">

@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/buyer/login', [BuyerController::class, 'login']);
+Route::post('/buyer/signup', [BuyerController::class, 'signup']);
 
 Route::group(['middleware' => ['auth:users']], function(){
     Route::prefix('product')->group(function () {
