@@ -11,15 +11,39 @@
             <router-link :to="{name: 'admin_order_list'}">
                 <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Order List</a>
             </router-link>
-            <a class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Logout</a>
+            <a @click.prevent="logout" class="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Logout</a>
             </nav>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+import {API_BASE_URL} from '../../config';
 export default {
+    methods: {
+        logout() {
+            console.log('button click');
+            axios.get(`${API_BASE_URL}/product/admin/logout`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+            }).then(response => {
+                console.log(response);
+                //window.localStorage.clear(); //clear all localstorage
+                localStorage.removeItem('token');
+                localStorage.setItem('authenticated', false);
+                this.$router.push({ name: 'admin_login' });
+            });
+        },
+    },
 
+    mounted() {
+        console.log(localStorage.getItem('token'));
+        console.log('admin layout');
+    }
 }
 </script>
 

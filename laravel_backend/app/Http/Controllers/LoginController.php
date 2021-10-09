@@ -16,4 +16,8 @@ class LoginController extends Controller
     public function login(LoginRequest $request) {
         return $this->loginRepo->login($request);
     }
+
+    public function logout(Request $request) {
+        return $this->loginRepo->logout($request);
+    }
 }

@@ -63,7 +63,13 @@ export default {
         getProductUpdateData() {
             let id = this.$route.params.id;
             console.log(id);
-            axios.get('http://localhost:8000/api/product/get/update/data/' + id).then(response => {
+            axios.get('http://localhost:8000/api/product/get/update/data/' + id, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+            }).then(response => {
                 console.log(response);
                 this.productUpdateForm.name = response.data.name;
                 this.productUpdateForm.price = response.data.price;
@@ -78,8 +84,17 @@ export default {
         },
         productUpdate() {
             let id = this.$route.params.id;
-            this.productUpdateForm.post('http://localhost:8000/api/product/update/data/' + id).then(response => {
+            this.productUpdateForm.post('http://localhost:8000/api/product/update/data/' + id, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+            }).then(response => {
                 console.log(response);
+                this.$toast.success('Update Product Successfull', {
+                    position: 'bottom-right'
+                });
                 this.$router.push({ name: 'product' });
             });
         },
